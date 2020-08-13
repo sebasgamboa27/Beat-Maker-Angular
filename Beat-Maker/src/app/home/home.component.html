@@ -1,11 +1,11 @@
-<h1>Beat It!</h1>
+<h1>Music Maker</h1>
 <div class="drums">
   <div class="kick">
     <div class="pad">
       <input
         class="kickInput"
         type="checkbox"
-        onclick="changeColor('kick' , 1)"
+        (click)="changeColor('kick' , 1)"
       />
     </div>
     <div class="pad">
@@ -463,10 +463,5 @@
         onclick="changeColor('crash' , 8)"
       />
     </div>
-  </div>
-  <div class="reset">
-    <button onclick="resetTunes()">
-      <img src="./img/refresh.png" alt="reset" />
-    </button>
   </div>
 </div>

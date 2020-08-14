@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Tone from 'node_modules/tone';
+import * as marky from 'node_modules/marky';
+import { Note } from './Notes/Note';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,11 @@ export class HomeComponent implements OnInit {
   synth:any;
   notes:string[] = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
 	octives:number[] = [1,2,3,4,5,6];
-	
+
+	recorded: Note[] = [];
+	recording: boolean = false;
+	activeNote: string;
+
 	activePhaser: boolean;
 	activeChorus: boolean;
 
@@ -23,6 +29,7 @@ export class HomeComponent implements OnInit {
 		"octaves" : 2, 
 		"baseFrequency" : 400
 	}).toMaster();
+
 
  
 	msdown:boolean = false;
@@ -75,7 +82,40 @@ export class HomeComponent implements OnInit {
   }
 
   play(note){
-     this.synth.triggerAttackRelease(note,"8n");
+		if(this.recording){
+			let entry = marky.stop('hola');
+			var newNote = <Note>{};
+			newNote.note = note;
+			newNote.time = entry.duration;
+			this.recorded.push(newNote);
+			debugger;
+		}
+		this.synth.triggerAttackRelease(note,"8n");
+	}
+
+	record(){
+		if(this.recording){
+			this.recording = false;
+		}
+		else{
+			this.recording = true;
+			marky.mark('hola');
+		}
+	}
+
+	playRecording(){
+		const now = Tone.now()
+		debugger;
+		for (let index = 0; index < this.recorded.length; index++) {
+			let time = now+(this.recorded[index].time/1000);
+			this.synth.triggerAttackRelease(this.recorded[index].note, "8n", time);
+
+		}
+		this.activeNote = '';
+	}
+
+	clear(){
+		this.recorded = [];
 	}
 
 }

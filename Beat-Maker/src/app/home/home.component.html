@@ -12,3 +12,11 @@
     </div>
   </div>
 </div>
+
+<button type="button" class="btn btn-warning mr-3 mb-3 mt-3" (click)="record()">Record</button>
+<button type="button" class="btn btn-danger mr-3 mb-3 mt-3" (click)="clear()">Clear</button>
+<button type="button" class="btn btn-success mr-3 mb-3 mt-3" (click)="playRecording()">Play</button>
+
+<div class="col">
+  <button *ngFor="let note of recorded" class="btn btn-secondary mr-3 mb-3">{{note.note}}</button>
+</div>

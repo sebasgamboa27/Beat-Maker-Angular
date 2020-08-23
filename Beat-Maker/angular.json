@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Beat-Maker"
+    }
+  },
+  "defaultProject": "Beat-Maker",
+  "cli": {
+    "analytics": "176b18cd-c1e4-4a69-aa8c-37ab50811f58"
+  }
 }
